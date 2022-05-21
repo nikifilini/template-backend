@@ -1,0 +1,21 @@
+version: '3'
+services:
+  database:
+    image: 'postgres'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=main,test
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - database-data:/var/lib/postgresql/data
+      - ./docker/pg:/docker-entrypoint-initdb.d
+    networks:
+      - apbp-network
+
+volumes:
+  database-data:
+
+networks:
+  apbp-network:
